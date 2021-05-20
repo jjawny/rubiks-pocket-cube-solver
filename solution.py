@@ -14,7 +14,15 @@
 #testData = ["BOW", "BRW", "GRY", "GOY", "BRY", "BOY", "GOW", "GRW"] # expecting 6 steps (randomly put corners together)
 testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 9 steps (test data from section 6 of assignment pdf)
 #TODO testData above is completed in 5 steps... why :c
-
+#turn UP 90 anti               U'
+#turn RIGHT 90 anti          R'
+#turn UP  90x2            U U
+#turn FRONT 90x2          F F
+#turn TOP 90 clockwise       U
+#turn FRONT 90 anti           F'
+#turn RIGHT 90 anti            R'
+#turn FRONT 90 clockwise        F
+#turn TOP 90 anti                U'
 
 #██████╗░██╗░██████╗████████╗░█████╗░███╗░░██╗░█████╗░███████╗  ░█████╗░██╗░░░░░░█████╗░░██████╗░██████╗███████╗░██████╗
 #██╔══██╗██║██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██╔════╝  ██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝
@@ -62,7 +70,6 @@ def solution(problemCube):
     # when sorting, we will only save the corners that are a member of the 8 legal corners (regardless of position)
     afterSorted = [[("".join(sorted(corner.upper()))) for legalCorner in legalCorners if legalCorner == ("".join(sorted(corner.upper())))]for corner in problemCube]
     afterSorted = [item for sublist in afterSorted for item in sublist] # flatten to remove nested lists
-    
 
     # if not all 8 legal corners are found, the problem cube instance is invalid
     if len(afterSorted) < 8: 
