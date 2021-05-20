@@ -56,21 +56,27 @@ def solution(problemCube):
         [7,0,2,3,4,5,1,6],  # U' = up anti-clockwise
         [0,6,1,3,4,2,5,7],  # R  = right clockwise
         [0,2,5,3,4,6,1,7]]  # R' = right anti-clockwise
-
+    
     # sort the problem cube's corner's colours in alphabetical order & make them all uppercase for consistency
     # when sorting, we will only save the corners that are a member of the 8 legal corners (regardless of position)
     afterSorted = [[("".join(sorted(corner.upper()))) for legalCorner in legalCorners if legalCorner == ("".join(sorted(corner.upper())))]for corner in problemCube]
     afterSorted = [item for sublist in afterSorted for item in sublist] # flatten to remove nested lists
+    
 
     # if not all 8 legal corners are found, the problem cube instance is invalid
     if len(afterSorted) < 8: 
-        print("Invalid problem cube, please make sure you use the right corners in your string")
+        print("Invalid problem cube, please make sure you use the allowed corners in your list")
         return [{}]
 
     # get a list of the same problem cube but from different POVs (when looking at the 8 corners) keeps them in sequence which is crucial
     sortedProblemCube = "".join(afterSorted)
-    problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(6)]
+    problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(8)]
+    
+    # add mirrored problem cubes
+    for cube in problemCubes[:]:
+        problemCubes.append(cube[::-1])
 
+    print(problemCubes)
     found = False           # store the found problem cube (any 1 out of 8 of the POVs) also a flag
     toRotate = {solvedCube} # next set of parent cubes to rotate (starts off with the solved cube)
     temporary = set()       # temporary holding for next set of cubes to be rotated next after current rotations are done
