@@ -1,7 +1,8 @@
 def solution(problemCube):    
     solvedCube = "GRWGRYGOYGOWBOWBOYBRYBRW"; legalCorners = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"]; legalMoves = [[3,0,1,2,4,5,6,7], [1,2,3,0,4,5,6,7], [1,6,2,3,4,5,7,0], [7,0,2,3,4,5,1,6], [0,6,1,3,4,2,5,7], [0,2,5,3,4,6,1,7]]; afterSorted = [item for sublist in [[("".join(sorted(corner.upper()))) for legalCorner in legalCorners if legalCorner == ("".join(sorted(corner.upper())))]for corner in problemCube] for item in sublist]
     if len(afterSorted) < 8: print("Invalid problem cube, please make sure you use the right corners in your string"); return [{}]
-    sortedProblemCube = "".join(afterSorted); problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(6)]; found = False; toRotate = {solvedCube}; temporary = set(); V = set(); E = set()
+    sortedProblemCube = "".join(afterSorted); problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(8)]; found = False; toRotate = {solvedCube}; temporary = set(); V = set(); E = set()
+    for cube in problemCubes[:]: problemCubes.append(cube[::-1])
     while not found:
         solution = [((distanceClasses(V, E, solvedCube)), cube) for cube in problemCubes if cube in V]
         if solution: return solution[0]
@@ -13,7 +14,7 @@ def solution(problemCube):
 
 
 
-#11 lines c:
+#12 lines c:
 
 
 

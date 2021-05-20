@@ -76,7 +76,6 @@ def solution(problemCube):
     for cube in problemCubes[:]:
         problemCubes.append(cube[::-1])
 
-    print(problemCubes)
     found = False           # store the found problem cube (any 1 out of 8 of the POVs) also a flag
     toRotate = {solvedCube} # next set of parent cubes to rotate (starts off with the solved cube)
     temporary = set()       # temporary holding for next set of cubes to be rotated next after current rotations are done
