@@ -1,5 +1,5 @@
 def solve(problemCube):
-    solvedCube = "ABCDEFGHIJKLMNOPQRSTUVWX"
+    solvedCube = "GGGGRRRRBBBBOOOOWWWWYYYY"
     legalMoves = [
         [0,19,2,18,4,5,6,7,21,9,20,11,12,13,14,15,16,17,8,10,1,3,22,23],
         [0,20,2,21,4,5,6,7,18,9,19,11,12,13,14,15,16,17,3,1,10,8,22,23],
@@ -69,15 +69,13 @@ def NS_out(V, E, S):
 
 
 
-
-
-
-problemCube = "EFCVSJGHMNTLAUOPQRDBKIWX" #after 2 turns
-#problemCube = "MNCDABGHEFKLIJOPQRSTUVWX" #after 1 turns
+#problemCube = "GWGWRRRRYBYBOOOOWWBBGGYY" #after 2 turns
+problemCube = "OOGWGWRRRRYBYBOOWWBBGGYY" #after 1 turns
+#problemCube = "OOGWGRWRRRYBYOBOWWBGBGYY" #after ? turns
 solve(problemCube)
 
 
 
-#FIRST WORKING SOLUTION, however the letters are kinda ugly to input
-#so lets see if we can use only 6 letters to represent all 6 sides
-#side affect is that no longer having 24 unique stickers but instead 6 unique sets that each have the 4 same colours
+#sooooo it works if i rotate the cube to get the problem cube
+#but not if i just place a bunch of random letter (sticking to the rules: colours (W,G,R,B,O,Y) and only 4 of each)
+#it aint working
