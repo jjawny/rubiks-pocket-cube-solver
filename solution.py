@@ -7,12 +7,14 @@
 
 #testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "zzz"] # expecting warning msg (no such corner "zzz")
 #testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"] # expecting 0 steps (cube already solved)
+testData = ["GOY", "BRY", "BRW", "BOY", "BOW", "GRW", "GRY", "GOW"]  #rotated 11x expecting 11 steps
+
 #testData = ["GRY", "BRY", "GOY", "GOW", "BOW", "BOY", "BRW", "GRW"] # expecting 1 steps (applied 1 legal move)
 #testData = ["GRY", "BRY", "OGY", "OGW", "OBW", "OBY", "BRW", "GRW"] # expecting 1 steps (same as above except not in alphabetical order)
 #testData = ["BRW", "GOW", "GRY", "GOY", "BOW", "BOY", "GRW", "BRY"] # expecting 2 steps (applied 2 legal moves)
 #testData = ["brW", "GOw", "grY", "GOY", "bow", "BOY", "GRW", "bry"] # expecting 2 steps (same as above but not uppercase)
 #testData = ["BOW", "BRW", "GRY", "GOY", "BRY", "BOY", "GOW", "GRW"] # expecting 6 steps (randomly put corners together)
-testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 9 steps (test data from section 6 of assignment pdf)
+##testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 9 steps (test data from section 6 of assignment pdf)
 #TODO testData above is completed in 5 steps... why :c
 #turn UP 90 anti               U'
 #turn RIGHT 90 anti          R'
@@ -80,6 +82,11 @@ def solution(problemCube):
     sortedProblemCube = "".join(afterSorted)
     problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(8)]
     
+    #testing only
+    #splitCorners = [sortedProblemCube[i:i+3] for i in range(0, len(sortedProblemCube), 3)]
+    #newCube = '", "'.join([splitCorners[i] for i in legalMoves[3]])
+    #print(newCube)
+
     # add mirrored problem cubes
     for cube in problemCubes[:]:
         problemCubes.append(cube[::-1])
