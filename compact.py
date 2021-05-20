@@ -3,8 +3,8 @@ def solution(problemCube):
     if len(afterSorted) < 8: print("Invalid problem cube, please make sure you use the right corners in your string"); return [{}]
     sortedProblemCube = "".join(afterSorted); problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(6)]; found = False; toRotate = {solvedCube}; temporary = set(); V = set(); E = set()
     while not found:
-        for cube in problemCubes: 
-            if cube in V: distances = distanceClasses(V, E, solvedCube); distances.insert(len(distances),cube); return(distances)
+        solution = [((distanceClasses(V, E, solvedCube)), cube) for cube in problemCubes if cube in V]
+        if solution: return solution[0]
         print("searching...")
         for cube in toRotate:
             for move in range(6): splitCorners = [cube[i:i+3] for i in range(0, len(cube), 3)]; newCube = ''.join([splitCorners[i] for i in legalMoves[move]]); temporary.add(newCube); V.add(newCube); E.add((newCube, cube)); E.add((cube, newCube))
@@ -13,13 +13,7 @@ def solution(problemCube):
 
 
 
-
 #11 lines c:
- 
-
-    #afterSorted = [[("".join(sorted(corner.upper()))) for legalCorner in legalCorners if legalCorner == ("".join(sorted(corner.upper())))]for corner in problemCube]
-    #afterSorted = [item for sublist in afterSorted for item in sublist]
-
 
 
 
@@ -38,12 +32,12 @@ def distanceClassesR(V, E, D):
 def NS_out(V, E, S):
     return { v for v in V for u in S if (u,v) in E }
 
-def printSolution(distances):
-    problemCube = distances.pop() # remove the problem cube
-    [print("Cube already solved!") if distances.index(d) == 0 else print("Minimum number of steps to solve your cube are {0} steps!".format(distances.index(d))) for d in distances if problemCube in d]
+def printSolution(data):
+    [print("Cube already solved!") if data[0].index(distance) == 0 else print("Minimum number of steps to solve your cube are {0} steps!".format(data[0].index(distance))) for distance in data[0] if data[1] in distance]
 
 
 
+#testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"] # expecting 0 steps (cube already solved)
 
 testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 5 steps (test data from section 6 of assignment pdf)
 printSolution(solution(testData))
