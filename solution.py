@@ -1,17 +1,26 @@
 def solve(problemCube):
-    solvedCube = "GGGGRRRRBBBBOOOOWWWWYYYY"
+    #OLD unique 24 stickers = "ABCDEFGHIJKLMNOPQRSTUVWX"
+    #OLD colours solvedCube = "GGGGRRRRBBBBOOOOWWWWYYYY"
+    #OLD colours corners solvedCube = "GRWGRYOGYOGWOBWOBYBRYBRW"
+    #solvedCube = "LFULFDBLDBLUBRUBRDRFDRFU"
+    solvedCube = "GRWGRYOGYOGWOBWOBYBRYBRW"
+    #8 corners solvedCube = "111222333444555666777888"
+
     legalMoves = [
-        [0,19,2,18,4,5,6,7,21,9,20,11,12,13,14,15,16,17,8,10,1,3,22,23],
-        [0,20,2,21,4,5,6,7,18,9,19,11,12,13,14,15,16,17,3,1,10,8,22,23],
-        [12,13,2,3,0,1,6,7,4,5,10,11,8,9,14,15,16,17,18,19,20,21,22,23],
-        [4,5,2,3,8,9,6,7,12,13,10,11,0,1,14,15,16,17,18,19,20,21,22,23],
-        [0,1,2,3,4,17,6,19,8,9,10,11,23,13,21,15,16,14,18,12,20,5,22,7],
-        [0,1,2,3,4,21,6,23,8,9,10,11,19,13,17,15,16,5,18,7,20,14,22,12]]
+        [3,0,1,2,4,5,6,7], #R
+        [1,2,3,0,4,5,6,7], #R'
+        [7,0,2,3,4,5,1,6], #U
+        [1,6,2,3,4,5,7,0], #U'
+        [0,2,5,3,4,6,1,7],
+        [0,6,1,3,4,2,5,7]]
 
     V = set() #cubes
     E = set() #edges between cubes
     toRotate = {solvedCube} #temporary holding, starts off with the solvedCube
     temporary = set()
+
+    #splitCorners = [problemCube[i:i+3] for i in range(0, len(problemCube), 3)]
+    #print(''.join([splitCorners[i] for i in legalMoves[2]]))
 
     found = False
     while not found:
@@ -25,7 +34,13 @@ def solve(problemCube):
         print("looking for problem")
         for cube in toRotate:
             for move in range(0,6):
-                newCube = ''.join([cube[i] for i in legalMoves[move]])
+                splitCorners = [cube[i:i+3] for i in range(0, len(cube), 3)] #ensures corners are moved in groups of 3 also makes the algorithms above so much nicer
+                newCube = ''.join([splitCorners[i] for i in legalMoves[move]])
+                
+                print(splitCorners)
+                print(cube)
+                print(newCube)
+
                 V.add(newCube) #add new permitation (does not add duplicates)
                 temporary.add(newCube) #add children cubes to temporary as we will rotate them in the next
                 E.add((newCube, cube)) #add edge
@@ -69,13 +84,28 @@ def NS_out(V, E, S):
 
 
 
-#problemCube = "GWGWRRRRYBYBOOOOWWBBGGYY" #after 2 turns
-problemCube = "OOGWGWRRRRYBYBOOWWBBGGYY" #after 1 turns
-#problemCube = "OOGWGRWRRRYBYOBOWWBGBGYY" #after ? turns
+#RULE your cube MUST be these groups stringed together:
+# GRWGRYOGYOGWOBWOBYBRY
+# 
+# LFU = GRW in colours
+# LFD = GRY
+# BLD = OGY
+# BLU = OGW
+# BRU = OBW
+# BRD = OBY
+# RFD = BRY
+# RFU = BRW
+#problemCube = "BLULFULFDBLDBRUBRDRFDRFU" #after 1 turns
+#problemCube = "RFU BLU LFD BLD BRU BRD LFU RFD" #after 2 turns
+
+#problemCube = "OGWGRWGRYOGYOBWOBYBRYBRW" #after 1 turns
+problemCube = "BRWOGWGRYOGYOBWOBYGRWBRY" #after 2 turns
 solve(problemCube)
 
 
 
-#sooooo it works if i rotate the cube to get the problem cube
-#but not if i just place a bunch of random letter (sticking to the rules: colours (W,G,R,B,O,Y) and only 4 of each)
-#it aint working
+#sooooo even with unique stickers, the issue is anyone can input an illegal cube
+#as in, i just realised that a 2x2x2 cube can be viewed as 8 corners, with 3 stickers that always move TOGETHER
+#this means that for example, stickers 1,2,3 represent a corner and should always stay together "xxx123xxxxxxxxxxx" and "xxxxxxxxxxx123xxx" etc
+#however users can easily input "x1xxx2xxxx3xxxx" which completely destroys the program
+#this file therefore refactors the program's algorithms for illegal moves...
