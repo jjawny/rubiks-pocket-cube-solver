@@ -5,7 +5,7 @@
 #░░░██║░░░███████╗██████╔╝░░░██║░░░  ██████╔╝██║░░██║░░░██║░░░██║░░██║
 #░░░╚═╝░░░╚══════╝╚═════╝░░░░╚═╝░░░  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝
 
-#testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "zzz"] # expecting warning msg (no such corner ZRW)
+#testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "zzz"] # expecting warning msg (no such corner "zzz")
 #testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"] # expecting 0 steps (cube already solved)
 #testData = ["GRY", "BRY", "GOY", "GOW", "BOW", "BOY", "BRW", "GRW"] # expecting 1 steps (applied 1 legal move)
 #testData = ["GRY", "BRY", "OGY", "OGW", "OBW", "OBY", "BRW", "GRW"] # expecting 1 steps (same as above except not in alphabetical order)
@@ -13,6 +13,7 @@
 #testData = ["brW", "GOw", "grY", "GOY", "bow", "BOY", "GRW", "bry"] # expecting 2 steps (same as above but not uppercase)
 #testData = ["BOW", "BRW", "GRY", "GOY", "BRY", "BOY", "GOW", "GRW"] # expecting 6 steps (randomly put corners together)
 testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 5 steps (test data from section 6 of assignment pdf)
+
 
 #██████╗░██╗░██████╗████████╗░█████╗░███╗░░██╗░█████╗░███████╗  ░█████╗░██╗░░░░░░█████╗░░██████╗░██████╗███████╗░██████╗
 #██╔══██╗██║██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██╔════╝  ██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝
@@ -35,6 +36,7 @@ def distanceClassesR(V, E, D):
     # vertices connected by an edge from S.
 def NS_out(V, E, S):
     return { v for v in V for u in S if (u,v) in E }
+
 
 #░██████╗░█████╗░██╗░░░░░██╗░░░██╗████████╗██╗░█████╗░███╗░░██╗
 #██╔════╝██╔══██╗██║░░░░░██║░░░██║╚══██╔══╝██║██╔══██╗████╗░██║
@@ -80,9 +82,7 @@ def solution(problemCube):
             # if problem cube is found, get the set of distance classes
             # save the problem cube in the distances data structure, will be popped in printSolution()
             if cube in V:
-                distances = distanceClasses(V, E, solvedCube)
-                distances.insert(len(distances),cube)
-                return(distances)
+                return ((distanceClasses(V, E, solvedCube)), cube)
 
         print("searching...")  # let the user know the program is running
         for cube in toRotate:
@@ -103,7 +103,6 @@ def solution(problemCube):
         temporary = set()
 
 
-
 #██████╗░██████╗░██╗███╗░░██╗████████╗  ░██████╗░█████╗░██╗░░░░░██╗░░░██╗████████╗██╗░█████╗░███╗░░██╗
 #██╔══██╗██╔══██╗██║████╗░██║╚══██╔══╝  ██╔════╝██╔══██╗██║░░░░░██║░░░██║╚══██╔══╝██║██╔══██╗████╗░██║
 #██████╔╝██████╔╝██║██╔██╗██║░░░██║░░░  ╚█████╗░██║░░██║██║░░░░░██║░░░██║░░░██║░░░██║██║░░██║██╔██╗██║
@@ -111,23 +110,25 @@ def solution(problemCube):
 #██║░░░░░██║░░██║██║██║░╚███║░░░██║░░░  ██████╔╝╚█████╔╝███████╗╚██████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║
 #╚═╝░░░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝░░░╚═╝░░░  ╚═════╝░░╚════╝░╚══════╝░╚═════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
 
-def printSolution(distances):
-    problemCube = distances.pop() # remove the problem cube
-    for d in distances:
-        if problemCube in d:
-            index = distances.index(d)
+def printSolution(data):
+    #problemCube = distances.pop() # remove the problem cube
+    for distance in data[0]:
+        if data[1] in distance:
+            index = data[0].index(distance)
             if index == 0: 
                 print("Cube already solved!")
             else:
                 print("Minimum number of steps to solve your cube are {0} steps!".format(index))
 
+
 printSolution(solution(testData))
 
-#                      (BRW)                    GUIDE TO SCRAMBLING YOUR OWN CUBE: (I might make a scrambler function in the future)
+
+#                      (BRW)                    {{{{{{{{GUIDE TO SCRAMBLING YOUR OWN CUBE}}}}}}}}
 #                        +                         
-#                     _.-"-,                    A pocket cube (2x2x2) is made of 8 corner pieces that are all
-#                _.-""   |  ',                  unique in the way that each corner has a different combination
-#        (GRW)+:"        |    ',                of 3 colours (out of six). These colours are...
+#                     _.-"-,                    A Pocket Cube (2x2x2), is made of 8 corner pieces that are all unique
+#                _.-""   |  ',                  in the way that each corner has a different combination of 3 colours.
+#        (GRW)+:"        |    ',                The colours...
 #              |\        |      '.+(BRY)
 #              | \     (BOW)  _."|              (W) white
 #              |  '.   _.+.,."   |              (R) red
@@ -135,10 +136,34 @@ printSolution(solution(testData))
 #              |_-" "+'      ",  |              (G) green
 #        (GOW)+{   (GRY)       ".|              (B) blue
 #               \    |          ,+(BOY)         (O) orange
-#                ".  |      ,-'                   #TODO fix the input to [www, www, www, www]
-#                  \ |   ,-'                    The allowed corners are in the diagram to the left based on how a
-#                   \|,-'                       real pocket cube is coloured. Combine these into a single string
-#                    +                          to make a cube like this... "GRYOBYOBWBRYBRWGRWOGWOGY". As long as 
-#                  (GOY)                        you never split these combinations apart, it means your scrambled 
-#                                               cube can exist in real-life and therefore the program can solve it
-#    DESIGNED & PROGRAMMED BY JOHNNY MADIGAN    to let you know the minimum number of steps you'd need.
+#                ".  |      ,-'                 
+#                  \ |   ,-'                    The allowed corners are in the diagram to the left based on how a real-life Pocket cube
+#                   \|,-'                       is coloured. Arrange these 8 corners in any order to scramble your own cube like this...
+#                    +                          
+#                  (GOY)                        ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"]  
+#                                               
+#      {{{DESIGNED by JOHNNY MADIGAN}}}         As long as you use these 8 corners (no duplicates) the function will know it's a real
+#                                               cube and start solving it so it can let you know the minimum number of moves it took.
+#
+#____________________________________________________________________________________________________________________________________________
+#
+#                                               If you have a Pocket Cube in real-life and want to import it here, please follow these steps:
+#
+#                                               1. Choose any side of your cube in real-life and starting from the bottom-left corner, go 
+#                                                  clockwise and note the colours of each corner. For example...
+# 
+#                                                       Starting from bottom-left "GRW" go up to top-left "GRY" then  
+#                                                       go right to top-right "GOY" and finally go down to bottom-right "GOW"
+#
+#                                               2. Now spin your cube around so you're looking at the opposite face (horizontally 180 degrees)
+#                                                  and repeat, remember to start from the bottom-left corner and go clockwise!
+#
+#                                               3. That's it! don't worry about case and the order you wrote the colour's letters down as the 
+#                                                  function is smart enough to recognise the unique corner. For example...
+#
+#                                                       "BOY" is equivalent to "YOB", "bOy", "ByO" and so on... 
+#                                                       (the function knows this corner is unique with Blue, Orange and Yellow)
+#
+#
+#
+#                                                   TODO (I might make a scrambler function in the future but for now it's out-of-scope for the assignment)
