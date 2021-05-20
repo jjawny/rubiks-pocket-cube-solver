@@ -5,14 +5,14 @@
 #░░░██║░░░███████╗██████╔╝░░░██║░░░  ██████╔╝██║░░██║░░░██║░░░██║░░██║
 #░░░╚═╝░░░╚══════╝╚═════╝░░░░╚═╝░░░  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝
 
-#testData = "GRWGRYGOYGOWBOWBOYBRYzrw" # expecting warning msg (no such corner ZRW)
-#testData = "GRWGRYGOYGOWBOWBOYBRYBRW" # expecting 0 steps (cube already solved)
-#testData = "GRYBRYGOYGOWBOWBOYBRWGRW" # expecting 1 steps (applied 1 legal move)
-#testData = "GRYBRYOGYOGWOBWOBYBRWGRW" # expecting 1 steps (same as above except not in alphabetical order)
-#testData = "BRWGOWGRYGOYBOWBOYGRWBRY" # expecting 2 steps (applied 2 legal moves)
-#testData = "brWGOwgrYGOYbowBOYGRWbry" # expecting 2 steps (same as above but not uppercase)
-#testData = "BOWBRWGRYGOYBRYBOYGOWGRW" # expecting 6 steps (randomly put corners together)
-testData = "OBWBRYOGWBRWGRWGRYOBYOGY" # expecting 5 steps (test data from section 6 of assignment pdf)
+#testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "zrw"] # expecting warning msg (no such corner ZRW)
+#testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"] # expecting 0 steps (cube already solved)
+#testData = ["GRY", "BRY", "GOY", "GOW", "BOW", "BOY", "BRW", "GRW"] # expecting 1 steps (applied 1 legal move)
+#testData = ["GRY", "BRY", "OGY", "OGW", "OBW", "OBY", "BRW", "GRW"] # expecting 1 steps (same as above except not in alphabetical order)
+#testData = ["BRW", "GOW", "GRY", "GOY", "BOW", "BOY", "GRW", "BRY"] # expecting 2 steps (applied 2 legal moves)
+#testData = ["brW", "GOw", "grY", "GOY", "bow", "BOY", "GRW", "bry"] # expecting 2 steps (same as above but not uppercase)
+#testData = ["BOW", "BRW", "GRY", "GOY", "BRY", "BOY", "GOW", "GRW"] # expecting 6 steps (randomly put corners together)
+testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 5 steps (test data from section 6 of assignment pdf)
 
 #██████╗░██╗░██████╗████████╗░█████╗░███╗░░██╗░█████╗░███████╗  ░█████╗░██╗░░░░░░█████╗░░██████╗░██████╗███████╗░██████╗
 #██╔══██╗██║██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██╔════╝  ██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝
@@ -56,16 +56,23 @@ def solution(problemCube):
         [0,2,5,3,4,6,1,7]]  # R' = right anti-clockwise
 
     afterSorted = list()
-    splitProblemCube = [problemCube.upper()[i:i+3] for i in range(0, len(problemCube), 3)] # split string into groups of 3 (corners)
-    for corner in splitProblemCube:
+    for corner in problemCube:
+        sortedCorner = ("".join(sorted(corner.upper())))
         for legalCorner in legalCorners:
-            if ("".join(sorted(corner))) == legalCorner: afterSorted.append("".join(sorted(corner)))
+            if legalCorner == sortedCorner: afterSorted.append(sortedCorner)#; print(sorted(corner.upper())); print(legalCorner)
+
+    #afterSorted = list()
+    #splitProblemCube = [problemCube.upper()[i:i+3] for i in range(0, len(problemCube), 3)] # split string into groups of 3 (corners)
+    #for corner in splitProblemCube:
+    #    for legalCorner in legalCorners:
+    #        if ("".join(sorted(corner))) == legalCorner: afterSorted.append("".join(sorted(corner)))
 
     if len(afterSorted) < 8: 
         print("Invalid problem cube, please make sure you use the right corners in your string")
         return [{}]
 
     sortedProblemCube = "".join(afterSorted)
+    
     # get the same problem cube but from different POVs (when looking at the 8 corners) keeps them in sequence which is crucial
     problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(6)]
 
@@ -129,20 +136,10 @@ printSolution(solution(testData))
 #              |_-" "+'      ",  |              (G) green
 #        (GOW)+{   (GRY)       ".|              (B) blue
 #               \    |          ,+(BOY)         (O) orange
-#                ".  |      ,-'                   
+#                ".  |      ,-'                   #TODO fix the input to [www, www, www, www]
 #                  \ |   ,-'                    The allowed corners are in the diagram to the left based on how a
 #                   \|,-'                       real pocket cube is coloured. Combine these into a single string
 #                    +                          to make a cube like this... "GRYOBYOBWBRYBRWGRWOGWOGY". As long as 
 #                  (GOY)                        you never split these combinations apart, it means your scrambled 
 #                                               cube can exist in real-life and therefore the program can solve it
 #    DESIGNED & PROGRAMMED BY JOHNNY MADIGAN    to let you know the minimum number of steps you'd need.
-
-
-
-
-# TESTING ONLY TO BE REMOVED BEFORE SUBMITTING
-# to rotate the cube must be done in solve function
-#
-# splitCorners = [solvedCube[i:i+3] for i in range(0, len(solvedCube), 3)]
-# print(splitCorners)
-# print(''.join([splitCorners[i] for i in legalMoves[2]]))
