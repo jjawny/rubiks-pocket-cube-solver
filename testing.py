@@ -83,14 +83,15 @@ def NS_out(V, E, S):
 #██████╔╝╚█████╔╝███████╗╚██████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║
 #╚═════╝░░╚════╝░╚══════╝░╚═════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
 
-#WYBWGRGWYRRWBROBGOOOGBYY 5 rotations
-#WYBWGROOYRGWBRRWGOOBYGYB 6 rotations
-#WYBWGROBYROOBRGWGORWYYBG 7
-#WYBRGYOYOYORBRWWGORWGBBG 8
-#WYYYGGOBOORYBRRWGORWWBBG 9
-#WRYGGGOBOYRYRWBRBOGWWOBY 10
-#WRRBGGOYYYOROWWRBOGWGBBY 11
-testData = "WYBWGROOYRGWBRRWGOOBYGYB"
+#WYBWGRGWYRRWBROBGOOOGBYY 5 rotations    3746 unique permutations
+#WYBWGROOYRGWBRRWGOOBYGYB 6 rotations  17,646 unique permutations
+#WYBWGROBYROOBRGWGORWYYBG 7            82,150 unique permutations
+#WYBRGYOYOYORBRWWGORWGBBG 8           379,426 unique permutations
+#WYYYGGOBOORYBRRWGORWWBBG 9         1,739,310 unique permutations
+#WRYGGGOBOYRYRWBRBOGWWOBY 10        7,892,305 unique permutations
+#WRRBGGOYYYOROWWRBOGWGBBY 11        ...
+#check if same perm but just rotated before adding to V
+testData = "WRYGGGOBOYRYRWBRBOGWWOBY"
 
 def solution(problemCube):    
     solvedCube = "WWWWGGGGRRRRBBBBOOOOYYYY"
@@ -170,7 +171,7 @@ def solution(problemCube):
     print("found it")
     print(finalProblemCube)
     print(len(V))
-    #return [{}]
+    return [{}]
     return ((distanceClasses(V, E, solvedCube)), finalProblemCube)
 
 
