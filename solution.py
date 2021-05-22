@@ -7,24 +7,22 @@
 
 #testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "zzz"] # expecting warning msg (no such corner "zzz")
 #testData = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"] # expecting 0 steps (cube already solved)
-testData = ["GOY", "BRY", "BRW", "BOY", "BOW", "GRW", "GRY", "GOW"]  #rotated 11x expecting 11 steps
+
+
+
+#testData = ["BRY", "GRW", "BOW", "GOW", "BRW", "GOY", "BOY", "GRY"]  #rotated 11x expecting 11 steps
+#              BOY   GRY     BRY     GRW     BOW     GOW     BRW     GOY 
+#testData = ["GOW","BRY", "GRY", "BOY", "BOW", "BRW", "GOY", "GRW"] closest so far 7 moves of CAB230 data
+#testData = ["GRY", "BRW", "GOY", "GOW", "BOW", "BOY", "GRW", "BRY"] #most accurate still 7 but kept corner 4 fixed and every corner relevant to it (GOW is at position 4 just like solved cube, aka pivot point)
+testData = ["WGR", "RGY", "OYB", "YGO", "BOW", "BRY", "GOW", "BWR"] # going off at looking at the coloured cube then manually mapping out...
 
 #testData = ["GRY", "BRY", "GOY", "GOW", "BOW", "BOY", "BRW", "GRW"] # expecting 1 steps (applied 1 legal move)
 #testData = ["GRY", "BRY", "OGY", "OGW", "OBW", "OBY", "BRW", "GRW"] # expecting 1 steps (same as above except not in alphabetical order)
 #testData = ["BRW", "GOW", "GRY", "GOY", "BOW", "BOY", "GRW", "BRY"] # expecting 2 steps (applied 2 legal moves)
 #testData = ["brW", "GOw", "grY", "GOY", "bow", "BOY", "GRW", "bry"] # expecting 2 steps (same as above but not uppercase)
 #testData = ["BOW", "BRW", "GRY", "GOY", "BRY", "BOY", "GOW", "GRW"] # expecting 6 steps (randomly put corners together)
-##testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 9 steps (test data from section 6 of assignment pdf)
-#TODO testData above is completed in 5 steps... why :c
-#turn UP 90 anti               U'
-#turn RIGHT 90 anti          R'
-#turn UP  90x2            U U
-#turn FRONT 90x2          F F
-#turn TOP 90 clockwise       U
-#turn FRONT 90 anti           F'
-#turn RIGHT 90 anti            R'
-#turn FRONT 90 clockwise        F
-#turn TOP 90 anti                U'
+##testData = ["OBW", "BRY", "OGW", "BRW", "GRW", "GRY", "OBY", "OGY"] # expecting 11 steps (test data from section 6 of assignment pdf)
+
 
 #██████╗░██╗░██████╗████████╗░█████╗░███╗░░██╗░█████╗░███████╗  ░█████╗░██╗░░░░░░█████╗░░██████╗░██████╗███████╗░██████╗
 #██╔══██╗██║██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██╔════╝  ██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝
@@ -59,14 +57,15 @@ def NS_out(V, E, S):
 def solution(problemCube):    
     solvedCube = "GRWGRYGOYGOWBOWBOYBRYBRW" # starting cube & starting vertex for distance classes
 
+    
     legalCorners = ["GRW", "GRY", "GOY", "GOW", "BOW", "BOY", "BRY", "BRW"]
     legalMoves = [
         [3,0,1,2,4,5,6,7],  # F  = face clockwise
         [1,2,3,0,4,5,6,7],  # F' = face anti-clockwise
         [1,6,2,3,4,5,7,0],  # U  = up clockwise
         [7,0,2,3,4,5,1,6],  # U' = up anti-clockwise
-        [0,6,1,3,4,2,5,7],  # R  = right clockwise
-        [0,2,5,3,4,6,1,7]]  # R' = right anti-clockwise
+        [0,2,5,3,4,6,1,7],  # R  = right clockwise
+        [0,6,1,3,4,2,5,7]]  # R' = right anti-clockwise
     
     # sort the problem cube's corner's colours in alphabetical order & make them all uppercase for consistency
     # when sorting, we will only save the corners that are a member of the 8 legal corners (regardless of position)
@@ -80,16 +79,15 @@ def solution(problemCube):
 
     # get a list of the same problem cube but from different POVs (when looking at the 8 corners) keeps them in sequence which is crucial
     sortedProblemCube = "".join(afterSorted)
-    problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(8)]
     
-    #testing only
-    #splitCorners = [sortedProblemCube[i:i+3] for i in range(0, len(sortedProblemCube), 3)]
-    #newCube = '", "'.join([splitCorners[i] for i in legalMoves[3]])
-    #print(newCube)
+    #problemCubes = [sortedProblemCube]
+    # get all rotations
+    problemCubes = [sortedProblemCube[-3*view:] + sortedProblemCube[:-3*view] for view in range(8)]
+    print(problemCubes)
 
     # add mirrored problem cubes
-    for cube in problemCubes[:]:
-        problemCubes.append(cube[::-1])
+    #for cube in problemCubes[:]:
+    #    problemCubes.append(cube[::-1])
 
     found = False           # store the found problem cube (any 1 out of 8 of the POVs) also a flag
     toRotate = {solvedCube} # next set of parent cubes to rotate (starts off with the solved cube)
@@ -134,6 +132,7 @@ def printSolution(data):
     #problemCube = distances.pop() # remove the problem cube
     for distance in data[0]:
         if data[1] in distance:
+            print(data[1])
             index = data[0].index(distance)
             if index == 0: 
                 print("Cube already solved!")
