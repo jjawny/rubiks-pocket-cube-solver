@@ -40,7 +40,6 @@
 
             #GBWRYGOGRBRWWOGBYBWOYOYR
 #testData = "GBWRYGOGRBRWWOGBWOYBYOYR" #correct test data from lec and oriented correctly
-#testData = "WWWWGGGGRRRRBBBBOOOOYYYY" #solved 
 #testData = "WRRBGGOYYYOROWWRGOBWGBBY" #rotated manually
 #testData = "WWBBGWGWRRRRYBYBOOOOGGYY" #rotated U'
 
@@ -83,49 +82,31 @@ def NS_out(V, E, S):
 #██████╔╝╚█████╔╝███████╗╚██████╔╝░░░██║░░░██║╚█████╔╝██║░╚███║
 #╚═════╝░░╚════╝░╚══════╝░╚═════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
 
-#WYBWGRGWYRRWBROBGOOOGBYY 5 rotations    3746 unique permutations
-#WYBWGROOYRGWBRRWGOOBYGYB 6 rotations  17,646 unique permutations
-#WYBWGROBYROOBRGWGORWYYBG 7            82,150 unique permutations
-#WYBRGYOYOYORBRWWGORWGBBG 8           379,426 unique permutations
-#WYYYGGOBOORYBRRWGORWWBBG 9         1,739,310 unique permutations
-#WRYGGGOBOYRYRWBRBOGWWOBY 10        7,892,305 unique permutations
-#WRRBGGOYYYOROWWRBOGWGBBY 11        ...
+#WWWWGGGGRRRRBBBBOOOOYYYY solved            1 unique permutation
+#WWBBGWGWRRRRYBYBOOOOGGYY 1 rotation        7 unique permutations
+#WWBBGWOORRGWYBRROOYBYGYG 2 rotations      34 unique permutations
+#WYBOGWOORWGBBRYRGOGBYRYW 3     "         154 unique permutations
+#WYBOGWGBRWYRBRGBGOOORWYY 4     "         688 unique permutations yes
+#WYBWGRGWYRRWBROBGOOOGBYY 5     "        2944 unique permutations
+#WYBWGROOYRGWBRRWGOOBYGYB 6     "      11,913 unique permutations
+#WYBWGROBYROOBRGWGORWYYBG 7            44,971 unique permutations
+#WYBRGYOYOYORBRWWGORWGBBG 8           159,120 unique permutations
+#WYYYGGOBOORYBRRWGORWWBBG 9           519,628 unique permutations
+#WRYGGGOBOYRYRWBRGOBWWOBY 10        1,450,216 unique permutations
+#WRRBGGOYYYOROWWRGOBWGBBY 11        2,801,068 unique permutations
+#                         12        3,583,604 unique permutations
+#                         13        3,673,884 unique permutations
+#                         14        3,674,160 unique permutations
+#WRBRGWBORWBGGGYOYOYRWOYB
 #check if same perm but just rotated before adding to V
-testData = "WRYGGGOBOYRYRWBRBOGWWOBY"
+testData = "WRBRGWBORWBGGGYOYOYRWOYB"
 
 def solution(problemCube):    
     solvedCube = "WWWWGGGGRRRRBBBBOOOOYYYY"
-    #solvedCube = "ABCDEFGHIJKLMNOPQRSTUVWX"
-
 
     if not sorted(solvedCube) == sorted(problemCube):
         print("Invalid scrambled cube, please make sure you have 4 of each colours")
         return [{}]
-
-    # orient cube so we dont have to worry about rotations
-    rotations = [
-        [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21], # RIGHT
-        [2,0,3,1,8,9,10,11,12,13,14,15,16,17,18,19,4,5,6,7,21,23,20,22], # LEFT
-        [8,9,10,11,5,7,4,6,20,21,22,23,14,12,15,13,3,2,1,0,19,18,17,16], # UP
-        [18,19,16,17,6,4,7,5,0,1,2,3,13,15,12,14,23,22,21,20,8,9,10,11]] # DOWN
-
-    toRotate = {problemCube}
-    nextSet = set()
-    rotatedproperly = False
-    finalProblemCube = ""
-    #while not rotatedproperly:
-    #    print("rotating")
-    #    for cube in toRotate:
-    #        if cube[2] == 'C' and cube[5] == 'F' and cube[8] == 'I':
-    #            finalProblemCube = cube
-    #            rotatedproperly = True
-    #            break
-    #        else:
-    #            for rot in range(0,4):
-    #                newCube = ''.join([cube[i] for i in rotations[rot]])
-    #                nextSet.add(newCube)
-    #    toRotate = nextSet
-    #    nextSet = set()
 
     # legal moves
     legalMoves = [
@@ -134,7 +115,7 @@ def solution(problemCube):
         [0,1,2,3,4,5,18,19,8,9,6,7,12,13,10,11,16,17,14,15,22,20,23,21], # F    front clockwise
         [0,1,2,3,4,5,10,11,8,9,14,15,12,13,18,19,16,17,6,7,21,23,20,22], # F'   front anti-clockwise
         [0,9,2,11,4,5,6,7,8,21,10,23,14,12,15,13,3,17,1,19,20,18,22,16], # R    right clockwise
-        [0,18,2,16,4,5,6,7,8,1,10,3,13,15,12,14,21,17,23,19,20,9,22,11]] # R'   right anti-clockwise
+        [0,18,2,16,4,5,6,7,8,1,10,3,13,15,12,14,23,17,21,19,20,9,22,11]] # R'   right anti-clockwise
 
     toRotate = {solvedCube} # next set of parent cubes to rotate (starts off with the solved cube)
     temporary = set()       # temporary holding for next set of cubes to be rotated next after current rotations are done
@@ -150,29 +131,54 @@ def solution(problemCube):
 #turn FRONT 90 anti           F'
 #turn RIGHT 90 anti            R'
 #turn FRONT 90 clockwise        F
-#turn TOP 90 anti                U'    1  2  5 3   0   2 2 0 0 5 1
+#turn TOP 90 anti                U'    1  2  5 3   0      2 2 0 0 5 1
+    
+    six = [
+        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+        [12,13,14,15,9,11,8,10,21,23,20,22,18,16,19,17,1,0,3,2,7,6,5,4],
+        [8,9,10,11,5,7,4,6,20,21,22,23,14,12,15,13,3,2,1,0,19,18,17,16],
+        [20,21,22,23,7,6,5,4,19,18,17,16,15,14,13,12,9,8,11,10,0,1,2,3],
+        [4,5,6,7,17,19,16,18,22,20,23,21,10,8,11,9,2,0,3,1,15,14,13,12],
+        [16,17,18,19,13,15,12,14,23,22,21,20,6,4,7,5,0,1,2,3,11,10,9,8]]
 
-    finalProblemCube = problemCube
-    while finalProblemCube not in V:
-        print("searching...")
+    four = [
+        [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+        [2,0,3,1,8,9,10,11,12,13,14,15,16,17,18,19,4,5,6,7,21,23,20,22],
+        [3,2,1,0,12,13,14,15,16,17,18,19,4,5,6,7,8,9,10,11,23,22,21,20],
+        [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21]]
+
+    # get all 24 rotations of the problem cube in 3D space in 3D space
+    pCubes = set()
+    for rot in range(0,len(six)):
+        anewCube = ''.join([problemCube[i] for i in six[rot]])
+        for spin in range(0, len(four)):
+            pCubes.add(''.join([anewCube[i] for i in four[spin]]))
+
+    print("searching...")
+    found = False
+    while not found:
+        for c in pCubes:
+            if c in V:
+                found = True
+                print("found it")
+                print(len(V))
+                return ((distanceClasses(V, E, solvedCube)), c)
+        print(len(V))
         for cube in toRotate:
-            for move in range(0,6):
+            for move in range(0,len(legalMoves)):
                 newCube = ''.join([cube[i] for i in legalMoves[move]])
+                
                 V.add(newCube)
                 E.add((newCube, cube))
                 E.add((cube, newCube))
                 temporary.add(newCube)
-
+    
         # reset
         V = V.union(toRotate)
         toRotate = temporary
         temporary = set()
 
-    print("found it")
-    print(finalProblemCube)
-    print(len(V))
-    return [{}]
-    return ((distanceClasses(V, E, solvedCube)), finalProblemCube)
+    
 
 
 
@@ -184,7 +190,6 @@ def solution(problemCube):
 #╚═╝░░░░░╚═╝░░╚═╝╚═╝╚═╝░░╚══╝░░░╚═╝░░░  ╚═════╝░░╚════╝░╚══════╝░╚═════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
 
 def printSolution(data):
-    print("made it to print solution")
     for distance in data[0]:
         if data[1] in distance:
             index = data[0].index(distance)
