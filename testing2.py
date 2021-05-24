@@ -37,19 +37,39 @@ def depthFirstR(V, E, u, goal, T):
     #print('processing ', u)                # process vertex u
     
     if len(T) == len(V): return T # already seen all?
-
-    
     Nu = N(V, E, u) - T     # Neighbours not already seen
+    print(len(Nu))
     T.update(Nu)            # Update set of vertices seen
-    
-    #if goal in T:
-    #        print("finished early")
-    #        return T
-    for v in (Nu):
-        if goal not in T:
-            T.update(depthFirstR(V, E, v, goal, T))  # update vertices seen in branch
-        else:
-            return T
+    print(len(T))
+    temp = set()
+    while goal not in T:
+        print("working")
+        for v in Nu:
+            if len(T) >= len(V): print("seen all"); break # already seen all?
+            y = (N(V, E, v) - T)
+            for i in y:
+                temp.add(i)     # Neighbours not already seen 
+            if goal in y:
+                for i in y:
+                    temp.add(i)     # Neighbours not already seen 
+                print("earlyyyy")
+                print(goal)
+                #temp.add(goal)
+                goalsNeighbours = (N(V, E, goal) - T)
+                goalsNeighbours.add(goal)
+                goalsNeighbours.add(v)
+                T = T.union(goalsNeighbours)
+                #T = T.union(temp)
+                T = T.union(Nu)
+                if goal in temp:
+                    print ("yes its here")
+                print("found early should stop here")    
+                return T                
+
+        T = T.union(Nu)
+        Nu = temp
+        temp = set()
+    print("returned")
     return T
 
 
@@ -112,7 +132,7 @@ def NS_out(V, E, S):
 #check if same perm but just rotated before adding to V
 #import sys
 #sys.setrecursionlimit(5000)
-testData = "WYBWGROOYRGWBRRWGOOBYGYB" # max acheived 6 (not reliable)
+testData = "WYBRGYOYOYORBRWWGORWGBBG" #max achieved 9
 
 def solution(problemCube):    
     solvedCube = "WWWWGGGGRRRRBBBBOOOOYYYY"
@@ -139,11 +159,15 @@ def solution(problemCube):
         [3,2,1,0,12,13,14,15,16,17,18,19,4,5,6,7,8,9,10,11,23,22,21,20], # Spin left 270 degrees
         [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21]] # Spin left 360 degrees
 
-    if not sorted(solvedCube) == sorted(problemCube):
+    if not sorted(solvedCube) == sorted(problemCube): # check early to see if the cube is scrambled properly
         print("Invalid scrambled cube, please make sure you have 4 of each colours")
         return [{}]
 
-    # get all 24 rotations of the problem cube in 3D space in 3D space
+    if solvedCube == problemCube: # solve here rather than processing at all to save memory
+        print("Cube already solved!")
+        return [{}]
+
+    # get all 24 rotations of the problem cube in 3D space in 3D space so we can ignore position
     pCubes = set()
     for rot in range(0,len(six)):
         anewCube = ''.join([problemCube[i] for i in six[rot]])
@@ -173,9 +197,8 @@ def solution(problemCube):
                 if newCube in pCubes:
                 #found = ''.join(c for c in pCubes if c in V)
                 #if found:
-                    print("found")
-                    yeet = depthFirst(V, E, solvedCube, newCube)
-                    
+                    print("found it!")
+                    yeet = depthFirst(V, E, newCube, solvedCube)
                     newE = set()
                     for e in E:
                         if e[0] in yeet:
@@ -189,6 +212,12 @@ def solution(problemCube):
                     print(len(E))
                     print("new E length")
                     print(len(newE))
+
+                    if newCube in yeet:
+                        print ("yes its heressds")
+                    for pair in newE:
+                        if newCube in pair:
+                            print("also in edges")
 
                     print("Total permutations... {0}\nCreating solution model...".format(len(V)))
                     return ((distanceClasses(yeet, newE, solvedCube)), newCube)
@@ -209,16 +238,10 @@ def solution(problemCube):
 
 def printSolution(data):
     #[print("Cube already solved!") if data[0].index(distance) == 0 else print("Minimum number of steps to solve your cube are {0} steps!".format(data[0].index(distance))) for distance in data[0] if data[1] in distance]
-    print("here")
-    print(data[1])
-    for distance in data[0]: # SAME AS ABOVE
+    for distance in data[0]:
         if data[1] in distance:
             index = data[0].index(distance)
-            if index == 0: 
-                print("Cube already solved!")
-            else:
-                print("Minimum number of steps to solve your cube are {0} steps!".format(index))
-
+            print("Minimum number of steps to solve your cube are {0} steps!".format(index))
 
 printSolution(solution(testData))
 
