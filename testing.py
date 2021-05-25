@@ -164,7 +164,7 @@ def solution(problemCube):
 
                 # add vertex (permutation) & edges (related cubes)
                 V.add(newCube)
-                E.update(((newCube, cube),(cube, newCube)))
+                E.update([(cube, newCube)])
                 temporary.add(newCube)
 
                 # check if the problem cube is found here so we
@@ -174,24 +174,36 @@ def solution(problemCube):
                 #found = ''.join(c for c in pCubes if c in V)
                 #if found:
                     print("found")
-                    yeet = depthFirst(V, E, solvedCube, newCube)
-                    
-                    newE = set()
-                    for e in E:
-                        if e[0] in yeet:
-                            if e[1] in yeet:
-                                newE.add(e)
+                    improvedE = list(E)
+                    newE = set() 
+                    find = newCube
+                    while not solvedCube in newE:
+                        index = [y[1] for y in improvedE].index(find)
+                        yes = improvedE[index]
+                        newE.add(yes[1])
+                        find = yes[0]
+
+                    newE.add(solvedCube)
+                    print(newE)
+                    print("done")
+                    newEdges = set()
+                    for edge in E:
+                        if edge[0] in newE:
+                            if edge[1] in newE:
+                                newEdges.update([(edge[0], edge[1]),(edge[1],edge[0])])
+                    print(newEdges)
+
                     print("old V length")
                     print(len(V))
                     print("new V length")
-                    print(len(yeet))
+                    print(len(newE))
                     print("Old E length")
                     print(len(E))
                     print("new E length")
-                    print(len(newE))
+                    print(len(newEdges))
 
                     print("Total permutations... {0}\nCreating solution model...".format(len(V)))
-                    return ((distanceClasses(yeet, newE, solvedCube)), newCube)
+                    return ((distanceClasses(newE, newEdges, solvedCube)), newCube)
         # reset
         V = V.union(toRotate)
         toRotate = temporary
@@ -209,8 +221,6 @@ def solution(problemCube):
 
 def printSolution(data):
     #[print("Cube already solved!") if data[0].index(distance) == 0 else print("Minimum number of steps to solve your cube are {0} steps!".format(data[0].index(distance))) for distance in data[0] if data[1] in distance]
-    print("here")
-    print(data[1])
     for distance in data[0]: # SAME AS ABOVE
         if data[1] in distance:
             index = data[0].index(distance)

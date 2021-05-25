@@ -1,45 +1,47 @@
-V = { 1, 2, 3, 4 }
-E = { (1,2), (2,1), (1,3), (3,1), (2,3), (3,2), (1,4), (4,1)}
-V = {'WRBBGRGWYYRROBYBWOWOGGYO', 'WRWRGGGGRYRYBBBBWOWOYOYO', 'WRGGGYGORRYYWBRBWOWOBBYO', 'WOWOGGGGRWRWBBBBYOYOYRYR', 'WRWRGGWORYGGBBRYWOBBYYOO', 'WWGGGYGYRRRRWBWBOOOOBBYY', 'WWBBGWOORRGWYBRROOYBYGYG', 'WWYYGBGBRRRRGBGBOOOOWWYY', 'WWBBGWGWRRRRYBYBOOOOGGYY', 'WWWWGGRRRRBBBBOOOOGGYYYY', 'WYWYGGGGROROBBBBROROYWYW', 'WRWRGGRYRYBBBBWOWOGGOOYY', 'WWWWGGGGRRRRBBBBOOOOYYYY', 'WWWWGGOORRGGBBRROOBBYYYY'}
-E = {('WWBBGWGWRRRRYBYBOOOOGGYY', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WWYYGBGBRRRRGBGBOOOOWWYY', 'WWBBGWGWRRRRYBYBOOOOGGYY'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WRWRGGRYRYBBBBWOWOGGOOYY'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WWGGGYGYRRRRWBWBOOOOBBYY'), ('WRWRGGWORYGGBBRYWOBBYYOO', 'WRWRGGGGRYRYBBBBWOWOYOYO'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WRGGGYGORRYYWBRBWOWOBBYO'), ('WRWRGGRYRYBBBBWOWOGGOOYY', 'WRWRGGGGRYRYBBBBWOWOYOYO'), ('WYWYGGGGROROBBBBROROYWYW', 'WRWRGGGGRYRYBBBBWOWOYOYO'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WRBBGRGWYYRROBYBWOWOGGYO'), ('WWWWGGRRRRBBBBOOOOGGYYYY', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WWBBGWGWRRRRYBYBOOOOGGYY'), ('WWBBGWGWRRRRYBYBOOOOGGYY', 'WWBBGWOORRGWYBRROOYBYGYG'), ('WRBBGRGWYYRROBYBWOWOGGYO', 'WRWRGGGGRYRYBBBBWOWOYOYO'), ('WWGGGYGYRRRRWBWBOOOOBBYY', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WOWOGGGGRWRWBBBBYOYOYRYR'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WYWYGGGGROROBBBBROROYWYW'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WWWWGGRRRRBBBBOOOOGGYYYY'), ('WRWRGGGGRYRYBBBBWOWOYOYO', 'WRWRGGWORYGGBBRYWOBBYYOO'), ('WWBBGWGWRRRRYBYBOOOOGGYY', 'WWYYGBGBRRRRGBGBOOOOWWYY'), ('WWBBGWOORRGWYBRROOYBYGYG', 'WWBBGWGWRRRRYBYBOOOOGGYY'), ('WRGGGYGORRYYWBRBWOWOBBYO', 'WRWRGGGGRYRYBBBBWOWOYOYO'), ('WOWOGGGGRWRWBBBBYOYOYRYR', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WWWWGGOORRGGBBRROOBBYYYY'), ('WWWWGGOORRGGBBRROOBBYYYY', 'WWWWGGGGRRRRBBBBOOOOYYYY'), ('WWWWGGGGRRRRBBBBOOOOYYYY', 'WRWRGGGGRYRYBBBBWOWOYOYO')} 
-E_directed = { (1,2), (1,3), (2,3), (3,4) }
+graph = {'A': ['B', 'C'],
+         'B': ['D', 'A', 'E'],
+         'C': ['F', 'A'],
+         'D': ['B'],
+         'E': ['B', 'F'],
+         'F': ['E', 'C']}
+
+#if 'F' in graph:
+#    print(graph['F'])
+#    print(graph['F'][0])
+
+#    print("works")
+
+visited = set() # Set to keep track of visited nodes.
 
 
-# vertices connected by an edge to S
-def NS_in(V, E, S):
-    return { v for v in V for u in S if (v,u) in E }
+
+def bfs(graph, start, end):
+    # maintain a queue of paths
+    queue = []
+    # push the first path into the queue
+    queue.append([start])
+    while queue:
+        # get the first path from the queue
+        path = queue.pop(0)
+        # get the last node from the path
+        node = path[-1]
+        # path found
+        if node == end:
+            return path
+        # enumerate all adjacent nodes, construct a new path and push it into the queue
+        for adjacent in graph.get(node, []):
+            new_path = list(path)
+            new_path.append(adjacent)
+            queue.append(new_path)
 
 
+yeet = bfs(graph, 'A', 'F')
+#print(yeet)
+s = set(yeet)
+#print(s)
 
+e = (("lass","gass"), ("ass","pass"))
+for eee in e:
+    print(eee[0])
 
-# ██████  ███████ ███████
-# ██   ██ ██      ██
-# ██████  █████   ███████
-# ██   ██ ██           ██
-# ██████  ██      ███████
-
-def breadthFirst(V, E, u, found):
-    print('processing ', u)            # Process vertex u
-    V0 = V              # V_0 = V
-    D = {u}             # D[0] = D_0 = {u}
-    return breadthFirstR(V0, E, D, found)
-    
-
-def breadthFirstR(V, E, D, found):
-    Vnew = V - D                 # V_{j} = V_{j-1} / D_{j-1}
-    if len(Vnew) == 0: return    # Already considered all elements?
-    Dnew = NS_in(Vnew, E, D)     # D_{j} = N_{V_j}(D_{j-1})
-    yeet = set()
-    for u in Dnew:            
-        print('processing ', u)              # Process vertex u
-        yeet.add(u)
-        if u == found:
-            return yeet
-    return breadthFirstR(Vnew, E, Dnew, found)
-
-print()
-print('BFS from WWWWGGGGRRRRBBBBOOOOYYYY')
-yeet = breadthFirst(V, E, 'WWWWGGGGRRRRBBBBOOOOYYYY', 'WWBBGWOORRGWYBRROOYBYGYG')
-print(yeet)
-print(len(yeet))
 
