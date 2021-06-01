@@ -27,7 +27,7 @@
 #
 #OBBBWWRORRBYYYOGOGWGWGYR               6 steps                              NEW testData from Assignment PDF Section 6
 
-testData = "WSDAWKLDM33ML3MDSLKCMDLE"
+testData = "OBBBWWRORRBYYYOGOGWGWGYR"
 
 
 #██████╗░███████╗░██████╗
@@ -65,79 +65,20 @@ def breadthFirst(graph, start, end):
 #╚═════╝░░╚════╝░╚══════╝░╚═════╝░░░░╚═╝░░░╚═╝░╚════╝░╚═╝░░╚══╝
 
 def solution(instance):    
-    solvedCube = "WWWWGGGGRRRRBBBBOOOOYYYY" # the solved instance
-    instance = instance.upper() # make sure instance is capitalised
-
-    # The 6 legal quarter turns rather than 12 as half the moves are redundent,
-    # this is because we don't care about the orientation of the cube
-    legalMoves = [[0,1,7,5,4,20,6,21,10,8,11,9,2,13,3,15,16,17,18,19,14,12,22,23],  # U    up clockwise
-        [0,1,12,14,4,3,6,2,9,11,8,10,21,13,20,15,16,17,18,19,5,7,22,23],            # U'   up anti-clockwise
-        [0,1,2,3,4,5,18,19,8,9,6,7,12,13,10,11,16,17,14,15,22,20,23,21],            # F    front clockwise
-        [0,1,2,3,4,5,10,11,8,9,14,15,12,13,18,19,16,17,6,7,21,23,20,22],            # F'   front anti-clockwise
-        [0,9,2,11,4,5,6,7,8,21,10,23,14,12,15,13,3,17,1,19,20,18,22,16],            # R    right clockwise
-        [0,18,2,16,4,5,6,7,8,1,10,3,13,15,12,14,23,17,21,19,20,9,22,11]]            # R'   right anti-clockwise
-
-    # Rotating the whole cube in 3D space (each face takes a turn being on top)
-    six = [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-        [12,13,14,15,9,11,8,10,21,23,20,22,18,16,19,17,1,0,3,2,7,6,5,4],
-        [8,9,10,11,5,7,4,6,20,21,22,23,14,12,15,13,3,2,1,0,19,18,17,16],
-        [20,21,22,23,7,6,5,4,19,18,17,16,15,14,13,12,9,8,11,10,0,1,2,3],
-        [4,5,6,7,17,19,16,18,22,20,23,21,10,8,11,9,2,0,3,1,15,14,13,12],
-        [16,17,18,19,13,15,12,14,23,22,21,20,6,4,7,5,0,1,2,3,11,10,9,8]]
-
-    # Spinning the whole cube keeping the same face down (4 x 90degree rotations)
-    four = [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
-        [2,0,3,1,8,9,10,11,12,13,14,15,16,17,18,19,4,5,6,7,21,23,20,22],
-        [3,2,1,0,12,13,14,15,16,17,18,19,4,5,6,7,8,9,10,11,23,22,21,20],
-        [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21]]
-
-    # Check early to see if the cube is scrambled properly,
-    # if so, return the correct data structure but empty, saving memory
-    if not sorted(solvedCube) == sorted(instance): 
-        return []
-    
-    # Check early to see if the cube is already solved,
-    # if so, return the solved cube in the correct data structure, saving memory
-    if solvedCube == instance: 
-        return [solvedCube]
-
-    # Since we want ultimate flexibility for user inputs, the instance may be in any orientation,
-    # therefore we must get all 24 orientations of the problem instance in 3D space so we can ignore the position
-    pCubes = set()
-    for rot in range(0,len(six)):
-        newOrientation = ''.join([instance[i] for i in six[rot]])
-        [pCubes.add(''.join([newOrientation[i] for i in four[spin]])) for spin in range(0, len(four))]
-
-    graph = dict()          # Adjacency list (keys are vertices (cubes) and values are edges (cubes related by transforming to one-another with a quarter turn))
-    neighbours = list()     # Neighbour cubes for a parent cube, will be added to the graph (dictionary) with the parent cube as the key and the neighbour cubes as the values
-    toRotate = {solvedCube} # Next set of parent cubes to rotate (starts off with the solved cube)
-    temporary = set()       # Temporary holding for next set of cubes to be rotated next after current rotations are done
-
-    print("\nsearching...\n")
+    solvedCube = "WWWWGGGGRRRRBBBBOOOOYYYY"; instance = instance.upper(); legalMoves = [[0,1,7,5,4,20,6,21,10,8,11,9,2,13,3,15,16,17,18,19,14,12,22,23], [0,1,12,14,4,3,6,2,9,11,8,10,21,13,20,15,16,17,18,19,5,7,22,23], [0,1,2,3,4,5,18,19,8,9,6,7,12,13,10,11,16,17,14,15,22,20,23,21], [0,1,2,3,4,5,10,11,8,9,14,15,12,13,18,19,16,17,6,7,21,23,20,22], [0,9,2,11,4,5,6,7,8,21,10,23,14,12,15,13,3,17,1,19,20,18,22,16], [0,18,2,16,4,5,6,7,8,1,10,3,13,15,12,14,23,17,21,19,20,9,22,11]]; six = [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], [12,13,14,15,9,11,8,10,21,23,20,22,18,16,19,17,1,0,3,2,7,6,5,4], [8,9,10,11,5,7,4,6,20,21,22,23,14,12,15,13,3,2,1,0,19,18,17,16], [20,21,22,23,7,6,5,4,19,18,17,16,15,14,13,12,9,8,11,10,0,1,2,3], [4,5,6,7,17,19,16,18,22,20,23,21,10,8,11,9,2,0,3,1,15,14,13,12], [16,17,18,19,13,15,12,14,23,22,21,20,6,4,7,5,0,1,2,3,11,10,9,8]]; four = [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], [2,0,3,1,8,9,10,11,12,13,14,15,16,17,18,19,4,5,6,7,21,23,20,22], [3,2,1,0,12,13,14,15,16,17,18,19,4,5,6,7,8,9,10,11,23,22,21,20], [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21]]; pCubes = set()
+    if not sorted(solvedCube) == sorted(instance): return []
+    if solvedCube == instance: return [solvedCube]
+    for rot in range(0,len(six)): newOrientation = ''.join([instance[i] for i in six[rot]]); [pCubes.add(''.join([newOrientation[i] for i in four[spin]])) for spin in range(0, len(four))]
+    graph = dict(); neighbours = list(); toRotate = {solvedCube}; temporary = set(); print("\nsearching...\n")
     while not pCubes.intersection(graph):
-        
         for cube in toRotate:
-            for move in range(0,len(legalMoves)):
-                newCube = ''.join([cube[i] for i in legalMoves[move]])
-                neighbours.append(newCube)
-                
-            graph[cube] = neighbours     # Add the neighbours to the graph, this will be the edges between each neighbour cube and the parent cube
-            temporary.update(neighbours) # Store the neighbours to be rotated next round
-            neighbours = list()          # Reset as the neighbours have been added to the graph
-
-            # If any orientation of the problem instances is found in the graph, do a Breadth-first 
-            # search to get a list of the cubes (vertices) that make up the shortest path. Return this 
-            # list as these are the minimum number of steps & the steps themselves to solving the instance
+            for move in range(0,len(legalMoves)): newCube = ''.join([cube[i] for i in legalMoves[move]]); neighbours.append(newCube)
+            graph[cube] = neighbours; temporary.update(neighbours); neighbours = list()
             for c in pCubes:
-                if c in graph:
-                    print("Found instance after {:,} permutations\n".format(len(graph)))
-                    finalCubes = (breadthFirst(graph, solvedCube, c)) 
-                    return finalCubes
+                if c in graph: print("Found instance after {:,} permutations\n".format(len(graph))); finalCubes = (breadthFirst(graph, solvedCube, c)); return finalCubes
+        toRotate = temporary; temporary = set(); print("Total permutations so far... {:,}".format(len(graph)))
 
-        toRotate = temporary # Transfer the new permutations to be rotated next
-        temporary = set()    # Reset for the next set of new permutations
-        print("Total permutations so far... {:,}".format(len(graph))) # live update for number of permutations
-
+#                                                       13 lines c:
 
 #██████╗░██████╗░██╗███╗░░██╗████████╗  ░██████╗░█████╗░██╗░░░░░██╗░░░██╗████████╗██╗░█████╗░███╗░░██╗
 #██╔══██╗██╔══██╗██║████╗░██║╚══██╔══╝  ██╔════╝██╔══██╗██║░░░░░██║░░░██║╚══██╔══╝██║██╔══██╗████╗░██║
