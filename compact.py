@@ -12,9 +12,7 @@ def solution(instance):
         toRotate = temporary; temporary = set(); print("Total permutations so far... {:,}".format(len(V)))
 
 
-
-
-#                                                                                   12 lines c:
+#                                                    12 lines c:
 
 
 

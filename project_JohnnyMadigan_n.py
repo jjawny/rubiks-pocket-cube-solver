@@ -5,30 +5,29 @@
 #░░░██║░░░███████╗██████╔╝░░░██║░░░  ██████╔╝██║░░██║░░░██║░░░██║░░██║
 #░░░╚═╝░░░╚══════╝╚═════╝░░░░╚═╝░░░  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝
 
-#  Instances for testData  | min number of steps |     total unique permutations after number of steps     |
-#--------------------------|---------------------|---------------------------------------------------------|
-#WSDAWKLDM33ML3MDSLKCMDLE           n/a                    n/a INVALID CUBE
-#wwwwggggrrrrbbbbooooyyyy             0                        1 SOLVED but demonstrates that lowercase is allowed
-#WWWWGGGGRRRRBBBBOOOOYYYY             0                        1 SOLVED
-#WWBBGWGWRRRRYBYBOOOOGGYY             1                        7 (1 + 6 new permutations)
-#WWBBGWOORRGWYBRROOYBYGYG             2                       34 (7 + 27 new permutations)
-#WYBOGWOORWGBBRYRGOGBYRYW             3                      154 (34 + 120 new permutations)
-#WYBOGWGBRWYRBRGBGOOORWYY             4                      688 (etc)
-#WYBWGRGWYRRWBROBGOOOGBYY             5                    2,944
-#WYBWGROOYRGWBRRWGOOBYGYB             6                   11,913
-#WYBWGROBYROOBRGWGORWYYBG             7                   44,971
-#WYBRGYOYOYORBRWWGORWGBBG             8                  159,120
-#WYYYGGOBOORYBRRWGORWWBBG             9                  519,628
-#WRYGGGOBOYRYRWBRGOBWWOBY            10                1,450,216
-#WRRBGGOYYYOROWWRGOBWGBBY            11                2,801,068
-#       no example                   12                3,583,604
-#       no example                   13                3,673,884 
-#       no example                   14                3,674,160
+#  Instances for testData  | min number of steps to solve | total unique permutations generated after applying a certain number of steps |
+#--------------------------|------------------------------|------------------------------------------------------------------------------|
+#WSDAWKLDM33ML3MDSLKCMDLE                   n/a                        n/a = INVALID CUBE
+#wwwwggggrrrrbbbbooooyyyy               0 steps                          1 = ALREADY SOLVED but demonstrates that lowercase is allowed
+#WWWWGGGGRRRRBBBBOOOOYYYY               0 steps                          1 = ALREADY SOLVED
+#WWBBGWGWRRRRYBYBOOOOGGYY               1 steps                          7 = previous total (1) + new unique permutations (6)
+#WWBBGWOORRGWYBRROOYBYGYG               2 steps                         34 = previous total (7) + new unique permutations (27)
+#WYBOGWOORWGBBRYRGOGBYRYW               3 steps                        154 = previous total (34) + new unique permutations (120)
+#WYBOGWGBRWYRBRGBGOOORWYY               4 steps                        688 = previous total (154) + new unique permutations (534)
+#WYBWGRGWYRRWBROBGOOOGBYY               5 steps                      2,944 = previous total (688) + new unique permutations (2,256)
+#WYBWGROOYRGWBRRWGOOBYGYB               6 steps                     11,913 = previous total (2,944) + new unique permutations (8,969)
+#WYBWGROBYROOBRGWGORWYYBG               7 steps                     44,971 = previous total (11,913) + new unique permutations (33,058)
+#WYBRGYOYOYORBRWWGORWGBBG               8 steps                    159,120 = previous total (44,971) + new unique permutations (114,149)
+#WYYYGGOBOORYBRRWGORWWBBG               9 steps                    519,628 = previous total (159,120) + new unique permutations (360,508)
+#WRYGGGOBOYRYRWBRGOBWWOBY              10 steps                  1,450,216 = previous total (519,628) + new unique permutations (930,588)
+#WRRBGGOYYYOROWWRGOBWGBBY              11 steps                  2,801,068 = previous total (1,450,216) + new unique permutations (1,350,852)
+#       no example                     12 steps                  3,583,604 = previous total (2,801,068) + new unique permutations (782,536)
+#       no example                     13 steps                  3,673,884 = previous total (3,583,604) + new unique permutations (90,280)
+#       no example                     14 steps                  3,674,160 = previous total (3,673,884) + new unique permutations (276)
 #
-#
-#OBBBWWRORRBYYYOGOGWGWGYR             6                NEW testData from assignment PDF section 6
+#OBBBWWRORRBYYYOGOGWGWGYR               6 steps                              NEW testData from Assignment PDF Section 6
 
-testData = "OBBBWWRORRBYYYOGOGWGWGYR"
+testData = "OBBBWWRORRBYYYOGOGWGWGYR" # currently set to testData from Assignment PDF Section 6
 
 #██████╗░██╗░██████╗████████╗░█████╗░███╗░░██╗░█████╗░███████╗ ░█████╗░██╗░░░░░░█████╗░░██████╗░██████╗███████╗░██████╗
 #██╔══██╗██║██╔════╝╚══██╔══╝██╔══██╗████╗░██║██╔══██╗██╔════╝ ██╔══██╗██║░░░░░██╔══██╗██╔════╝██╔════╝██╔════╝██╔════╝

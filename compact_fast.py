@@ -38,8 +38,8 @@ testData = "OBBBWWRORRBYYYOGOGWGWGYR"
 #╚═════╝░╚═╝░░░░░╚═════╝░
 
 # Breadth-First Search function from https://stackoverflow.com/a/50575971
-# Since the permutations can go up to over 3.6 million, this performs the best
-# Was unsure if I was allowed to reference external code but checked with Matt and it's okay!
+# Since the permutations can go up to over 3.6 million (3,674,160 exactly), this performs the best.
+# Was unsure if I was allowed to reference external code but checked with Unit Coordinator Matt and he said it's okay!
 def breadthFirst(graph, start, end):
 
     queue = [(start,[start])]
@@ -89,7 +89,7 @@ def solution(instance):
 
 def printSolution(solution):
     steps = len(solution) - 1 # -1 as there are no steps to GET the solved cube, the graph just starts there
-    [print("\nInvalid scrambled cube, please make sure you have 4 of each colours\n") if steps == -1 else print("Minimum number of steps to solve your cube are {0} steps!\n".format(steps))]
+    [print("\nInvalid scrambled cube, please make sure you have 4 of each colours\n") if steps == -1 else print("\nMinimum number of steps to solve your cube are {0} steps!\n".format(steps))]
 
 printSolution(solution(testData))
 
