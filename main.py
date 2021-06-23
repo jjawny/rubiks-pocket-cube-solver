@@ -10,7 +10,7 @@
 #                                 '*8888.   '88888>       88"    88"    88"
 #                                   88888    '8888>        "~     "~     "~
 #                                   `8888>    `888                           
-#                                    "8888     8%     johnny.madigan@icloud.com
+#                                    "8888     8%           Johnny Madigan
 #                                     `"888x:-"    https://johnnymadigan.github.io/
 
 import project
