@@ -1,5 +1,6 @@
 from cube_error import IllegalCube
 from bfs import breadthFirst
+import time
 
 
 def solution(instance):
@@ -82,31 +83,36 @@ def solution(instance):
         temporary = set()    # Reset for the next set of new permutations
 
 
-def printSolution(solution):
+def printSolution(steps):
     """
     Prints the minimum number of steps to solve your cube.
 
-    :param solution: list of steps as cubes encoded as strings
+    :param steps: list of steps as cubes encoded as strings
     :returns: message for the minimum number of steps
     """
 
-    steps = len(solution) - 1 # minus 1 as there are no steps to get to the solved cube
+    min_steps = len(steps) - 1 # minus 1 as there are no steps to get to the solved cube
     
     print("Steps to solve your cube:\n")
 
     # Reverse to show steps from instance to solved cube, rather than solved cube to instance
-    for step in reversed(solution):
-        print("\
-    "+step[0]+step[1]+"\n\
-    "+step[2]+step[3]+"\n\
-"+step[6]+step[7]+" "+step[10]+step[11]+" "+step[14]+step[15]+" "+step[4]+step[5]+"\n\
-"+step[8]+step[9]+" "+step[12]+step[13]+" "+step[16]+step[17]+" "+step[18]+step[19]+"\n\
-    "+step[20]+step[21]+"\n\
-    "+step[22]+step[23]+"\n")
-    
-    # Check grammar
-    grammar = "are {0} steps!\n".format(steps)
-    if (steps == 1): grammar = "is 1 step!\n"
-    print("Minimum number of steps needed " + grammar)
+    for s in reversed(steps):
+        print ("        ┌───┬───┐")
+        print ("        │ {} │ {} │".format(s[0], s[1]))
+        print ("        ├───┼───┤")
+        print ("        │ {} │ {} │".format(s[2], s[3]))
+        print ("┌───┬───┼───┼───┼───┬───┬───┬───┐")
+        print ("│ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │".format(s[4], s[5], s[8], s[9], s[12], s[13], s[16], s[17]))
+        print ("├───┼───┼───┼───┼───┼───┼───┼───┤")
+        print ("│ {} │ {} │ {} │ {} │ {} │ {} │ {} │ {} │".format(s[6], s[7], s[10], s[11], s[14], s[15], s[18], s[19]))
+        print ("└───┴───┼───┼───┼───┴───┴───┴───┘")
+        print ("        │ {} │ {} │".format(s[20], s[21]))
+        print ("        ├───┼───┤")
+        print ("        │ {} │ {} │".format(s[22], s[23]))
+        print ("        └───┴───┘")
+        time.sleep(0.25)
 
-print("\nRun main.py\n")
+    # Check grammar
+    grammar = "are {0} steps!\n".format(min_steps)
+    if (min_steps == 1): grammar = "is 1 step!\n"
+    print("\nMinimum number of steps needed " + grammar)
