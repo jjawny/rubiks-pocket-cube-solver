@@ -1,7 +1,7 @@
-![unit](https://img.shields.io/badge/IFB104-Building%20IT%20Systems-ff69b4?style=plastic)
+![unit](https://img.shields.io/badge/CAB203-Discrete%20Structures-ff69b4?style=plastic)
 ![author](https://img.shields.io/badge/Author-Johnny%20Madigan-yellow?style=plastic)
-![year](https://img.shields.io/badge/Year-2019-lightgrey?style=plastic)
-![python version](https://img.shields.io/badge/Python%20version-2.7%20|%203.8-informational?style=plastic&logo=python)
+![year](https://img.shields.io/badge/Year-2021-lightgrey?style=plastic)
+![python version](https://img.shields.io/badge/Python%20version-2.7%20%7C%203.8%20|%203.9-informational?style=plastic&logo=python)
 
                                    .x88888x.            x*8888x.:*8888: -"888;                                   
                                   :8**888888X.  :>     X   48888X/`8888H/`8888H
@@ -25,9 +25,9 @@
 - [Dependencies](#dependencies)
 
 # About
-This project is my first *Python* assignment at the *Queensland University of Technology*. Using *Turtle Graphics*, the task requires us to design and easily reproduce complex visuals as tiles in a grid. Given a randomly generated pattern via nested lists, the program needs to read these instructions and populate the grid with these tiles accordingly. Tiles vary in size, design, with some broken.
+TODO
 
-![project running animation](/img/disney-project-eg.gif)
+![project running animation](/img/cube-solver-eg.gif)
 
 # How to run via the Terminal
 - Launch your OS' terminal.
@@ -39,10 +39,10 @@ foo@bar:~$ ls
 README.md    bfs.py    main.py    ...
 ```
 
-- Type 'python2 main.py' to launch the program.
+- Type 'python3 main.py' to launch the program.
 
 ```zsh
-foo@bar:~$ python2 main.py
+foo@bar:~$ python3 main.py
 ```
 
 # How to run via *Visual Studio Code*
@@ -57,7 +57,7 @@ foo@bar:~$ python2 main.py
 
 # Call Graph
 
-![pyan3 generated call graph](/img/disney-project-pyan3-call-graph.png)
+![pyan3 generated call graph](/img/cube-solver-pyan3-call-graph.png)
 
 # Dependencies
 *Python* Interpreter versions 2.7, 3.8, and 3.9 have been proven to compile as of writing this.
