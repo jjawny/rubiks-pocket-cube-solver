@@ -26,13 +26,13 @@
 - [Dependencies](#dependencies)
 
 # About
-## {A GRAPH THEORY PROJECT}
+### A GRAPH THEORY PROJECT
 TODO a Graph Theory project for CAB203 discrete structures
 
 ![project animation](/img/cube-solver-eg.gif)
 
 # Usage
-## {GUIDE TO USING READY-MADE CUBES}
+### GUIDE TO USING READY-MADE CUBES
 CopyPaste one of the encoded cubes below into the *'instance'* variable in *main.py* to solve using the program.
 ```python
 "WSDAWKLDM33ML3MDSLKCMDLE"  # x  illegal cube
@@ -44,7 +44,7 @@ CopyPaste one of the encoded cubes below into the *'instance'* variable in *main
 "WRYGGGOBOYRYRWBRGOBWWOBY"  # 10 steps - harder cube, only found after generating half a million permutations
 ```
 
-## {GUIDE TO USING YOUR OWN CUBE}
+### GUIDE TO USING YOUR OWN CUBES
 Rubik's Pocket Cube has 6 faces and 24 stickers (4 per face). When solved each face is a single colour, the colours are...
 
 ![colours](/img/colours.png)
@@ -71,12 +71,12 @@ Finally, follow the order in the diagram and note down the colour of the 24 stic
 ```python
 "WYYYGGOBOORYBRRWGORWWBBG"
 ```
-## {USING DOCSTRINGS}
+### GUIDE TO USING DOCSTRINGS
 CopyPaste the following commands into *main.py* to get details on what each function does.
 ```python
-print ("SOLUTION:" + project.solution.__doc__)
-print ("PRINT SOLUTION:" + project.printSolution.__doc__)
-print ("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
+print("SOLUTION:" + project.solution.__doc__)
+print("PRINT SOLUTION:" + project.printSolution.__doc__)
+print("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
 ```
 
 # How to run via the Terminal
