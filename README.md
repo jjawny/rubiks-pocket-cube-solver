@@ -34,6 +34,7 @@ TODO a Graph Theory project for CAB203 discrete structures
 # Usage
 ### GUIDE TO USING READY-MADE CUBES
 CopyPaste one of the encoded cubes below into the *'instance'* variable in *main.py* to solve using the program.
+
 ```python
 "WSDAWKLDM33ML3MDSLKCMDLE"  # x  illegal cube
 "WWWWGGGGRRRRBBBBOOOOYYYY"  # 0  steps - already solved
@@ -42,6 +43,9 @@ CopyPaste one of the encoded cubes below into the *'instance'* variable in *main
 "WWROGGOWYWRGBRYRBOBBGOYY"  # 6  steps
 "WYYYGGOBOORYBRRWGORWWBBG"  # 9  steps
 "WRYGGGOBOYRYRWBRGOBWWOBY"  # 10 steps - harder cube, only found after generating half a million permutations
+```
+```python
+instance = "WWROGGOWYWRGBRYRBOBBGOYY"
 ```
 
 ### GUIDE TO USING YOUR OWN CUBES
@@ -66,6 +70,7 @@ Choose any face from your cube and draw a diagram out like this:
         │ 23│24 │
         └───┴───┘
 ```
+
 Finally, follow the order in the diagram and note down the colour of the 24 stickers and you should end up with something like this:
 
 ```python
@@ -73,6 +78,7 @@ Finally, follow the order in the diagram and note down the colour of the 24 stic
 ```
 ### GUIDE TO USING DOCSTRINGS
 CopyPaste the following commands into *main.py* to get details on what each function does.
+
 ```python
 print("SOLUTION:" + project.solution.__doc__)
 print("PRINT SOLUTION:" + project.printSolution.__doc__)
