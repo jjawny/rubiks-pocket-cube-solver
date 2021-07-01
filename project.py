@@ -76,7 +76,7 @@ def solution(instance):
             for instance in instancePositions:
                 if instance in graph:
                     print("Found instance after {:,} permutations\n".format(len(graph)))
-                    shortestPath = (breadthFirst(graph, solvedCube, instance)) 
+                    shortestPath = (breadthFirst(graph, solvedCube, instance))
                     return shortestPath
 
         toRotate = temporary # Transfer the new permutations to be rotated next
