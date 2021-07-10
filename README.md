@@ -14,7 +14,7 @@
 
 # About
 ### A GRAPH THEORY PROJECT
-A Graph Theory project that demonstrates knowledge and skills using math & logic to solve real world problems. The chosen problem being that the infamous miniature Rubik's cube is often solved in the shortest amount of time, not the least amount of steps. Therefore, by generating a *Cayley Graph*, using distance classes, and the Breadth-first search algorithm, the shortest path between any scrambled cube and the solved cube can be found. First, the cube is encoded in *Python*, the problem is then translated to mathematical language. Finally, functions are developed to handle large amounts of data in a clever yet simple way to solve the problem.
+A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that the infamous miniature Rubik's cube is often solved in the shortest amount of time, not the least amount of steps. Therefore, by generating a *Cayley Graph*, using distance classes, and the Breadth-first search algorithm, the shortest path between any scrambled cube and the solved cube can be found. First, the cube is encoded in *Python*, the problem is then translated to mathematical language. Finally, functions are developed to handle large amounts of data in a clever yet simple way to solve the problem.
 
 Please see my report for more details.
 
