@@ -1,9 +1,9 @@
-![unit](https://img.shields.io/badge/CAB203-Discrete%20Structures-ff69b4?style=plastic)
+![unit](https://img.shields.io/badge/CAB2O3-Discrete%20Structures-ff69b4?style=plastic)
 ![author](https://img.shields.io/badge/Author-Johnny%20Madigan-yellow?style=plastic)
 ![year](https://img.shields.io/badge/Year-2021-lightgrey?style=plastic)
 ![python version](https://img.shields.io/badge/Python%20version-2.7%20%7C%203.8%20|%203.9-informational?style=plastic&logo=python)
 
-<p align="center">𝔍𝔬𝔥𝔫𝔫𝔶 𝔐𝔞𝔡𝔦𝔤𝔞𝔫 🐰</p>
+<p align="center">𝔍𝔬𝔥𝔫𝔫𝔶 𝔐𝔞𝔡𝔦𝔤𝔞𝔫</p>
 
 - [About](#about)
 - [Usage](#usage)
