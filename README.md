@@ -3,8 +3,6 @@
 ![year](https://img.shields.io/badge/Year-2021-lightgrey?style=plastic)
 ![python version](https://img.shields.io/badge/Python%20version-2.7%20%7C%203.8%20|%203.9-informational?style=plastic&logo=python)
 
-<p align="center">𝔍𝔬𝔥𝔫𝔫𝔶 𝔐𝔞𝔡𝔦𝔤𝔞𝔫</p>
-
 - [About](#about)
 - [Usage](#usage)
 - [How to run via the terminal](#how-to-run-via-the-terminal)
@@ -14,7 +12,7 @@
 
 # About
 ### A GRAPH THEORY PROJECT
-A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that the infamous miniature Rubik's cube is often solved in the shortest amount of time, not the least amount of steps. Therefore, by generating a *Cayley Graph*, using distance classes, and the Breadth-first search algorithm, the shortest path between any scrambled cube and the solved cube can be found. First, the cube is encoded in *Python*, the problem is then translated to mathematical language. Finally, functions are developed to handle large amounts of data in a clever yet simple way to solve the problem.
+A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph then uses distance classes and a Breadth-first search algorithms to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in *Python*, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
 
 Please see my report for more details.
 
