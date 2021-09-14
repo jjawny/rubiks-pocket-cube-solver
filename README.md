@@ -10,7 +10,7 @@
 - [Call Graph](#call-graph)
 - [Dependencies](#dependencies)
 
-# About
+# **About**
 ### A GRAPH THEORY PROJECT
 A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph then uses distance classes and a Breadth-first search algorithms to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in *Python*, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
 
@@ -18,7 +18,7 @@ Please see my report for more details.
 
 ![project animation](/img/ezgif-demonstration.gif)
 
-# Usage
+# **Usage**
 ### GUIDE TO USING READY-MADE CUBES
 CopyPaste one of the encoded cubes below into the *'instance'* variable in *main.py* to solve using the program.
 
@@ -35,7 +35,7 @@ CopyPaste one of the encoded cubes below into the *'instance'* variable in *main
 instance = "WWROGGOWYWRGBRYRBOBBGOYY"
 ```
 
-### GUIDE TO USING YOUR OWN CUBES
+### **GUIDE TO USING YOUR OWN CUBES**
 Rubik's Pocket Cube has 6 faces and 24 stickers (4 per face). When solved each face is a single colour, the colours are...
 
 ![colours](/img/colours.png)
@@ -63,7 +63,7 @@ Finally, follow the order in the diagram and note down the colour of the 24 stic
 ```python
 "WYYYGGOBOORYBRRWGORWWBBG"
 ```
-### GUIDE TO USING DOCSTRINGS
+### **GUIDE TO USING DOCSTRINGS**
 CopyPaste the following commands into *main.py* to get details on what each function does.
 
 ```python
@@ -72,35 +72,23 @@ print("PRINT SOLUTION:" + project.printSolution.__doc__)
 print("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
 ```
 
-# How to run via the Terminal
-- Launch your OS' terminal.
-- Navigate to the project folder (*cube-solver*) with the 'cd' command.
-- Confirm you are in the project folder with the 'ls' command, you should see *main.py* among the files.
+# **How to run via the Terminal**
+- Launch your OS' terminal
+- Navigate (`cd`) to the project directory
+- Run with `python3 main.py`
 
-```zsh
-foo@bar:~$ ls
-README.md    bfs.py    main.py    ...
-```
-
-- Type 'python3 main.py' to launch the program.
-
-```zsh
-foo@bar:~$ python3 main.py
-```
-
-# How to run via *Visual Studio Code*
+# **How to run via *Visual Studio Code***
 - Download *VScode*: https://code.visualstudio.com
 - Follow the *Getting Started with Python* guide: https://code.visualstudio.com/docs/python/python-tutorial
-- Launch *VScode*.
-- Select *Python* Interpreter version 2.7 or 3.8 or 3.9.
-- Open the project folder (*disney-project*) in *VScode*.
-- Select *main.py* and click run.
+- Launch *VScode*
+- Select *Python* Interpreter version 2.7 or 3.8 or 3.9
+- Open main.py in *VScode* and click run
 
 ![run button](/img/run-button.png)
 
-# Call Graph
+# **Call Graph**
 
 ![pyan3 generated call graph](/img/cube-solver-pyan3-call-graph.png)
 
-# Dependencies
+# **Dependencies**
 *Python* Interpreter versions 2.7, 3.8, and 3.9 have been proven to compile as of writing this.
