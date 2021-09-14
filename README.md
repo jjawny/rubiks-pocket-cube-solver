@@ -11,7 +11,7 @@
 - [Dependencies](#dependencies)
 
 # **About**
-### A GRAPH THEORY PROJECT
+### **A GRAPH THEORY PROJECT**
 A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph then uses distance classes and a Breadth-first search algorithms to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in *Python*, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
 
 Please see my report for more details.
@@ -19,7 +19,7 @@ Please see my report for more details.
 ![project animation](/img/ezgif-demonstration.gif)
 
 # **Usage**
-### GUIDE TO USING READY-MADE CUBES
+### **GUIDE TO USING READY-MADE CUBES**
 CopyPaste one of the encoded cubes below into the *'instance'* variable in *main.py* to solve using the program.
 
 ```python
