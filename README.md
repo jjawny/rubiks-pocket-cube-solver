@@ -12,7 +12,7 @@
 
 # **About**
 ### **A GRAPH THEORY PROJECT**
-A Graph Theory project that demonstrates my knowledge and skills using math & logic to solve real world problems. The chosen problem being that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph then uses distance classes and a Breadth-first search algorithms to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in *Python*, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
+A Graph Theory project, demonstrating my skills in using math/logic to solve real-world problems. The chosen problem is that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph, then uses distance classes and a Breadth-First Search algorithm to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in **Python**, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
 
 Please see my report for more details.
 
@@ -73,9 +73,10 @@ print("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
 ```
 
 # **How to run via the Terminal**
-- Launch your OS' terminal
-- Navigate (`cd`) to the project directory
-- Run with `python3 main.py`
+- Run with
+   ```sh
+   python3 main.py
+   ```
 
 # **How to run via *Visual Studio Code***
 - Download *VScode*: https://code.visualstudio.com
@@ -91,4 +92,4 @@ print("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
 ![pyan3 generated call graph](/img/cube-solver-pyan3-call-graph.png)
 
 # **Dependencies**
-*Python* Interpreter versions 2.7, 3.8, and 3.9 have been proven to compile as of writing this.
+**Python** Interpreter versions 2.7, 3.8, and 3.9 have been proven to compile as of writing this.
