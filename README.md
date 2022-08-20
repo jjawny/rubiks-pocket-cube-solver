@@ -1,7 +1,6 @@
-![unit](https://img.shields.io/badge/Unit-Discrete%20Structures-ff69b4?style=plastic)
-![author](https://img.shields.io/badge/Author-Johnny%20Madigan-yellow?style=plastic)
 ![year](https://img.shields.io/badge/Year-2021-lightgrey?style=plastic)
-![python version](https://img.shields.io/badge/Python%20version-2.7%20%7C%203.8%20|%203.9-informational?style=plastic&logo=python)
+![author](https://img.shields.io/badge/Author-Johnny%20Madigan-yellow?style=plastic)
+![python version](https://img.shields.io/badge/Python-informational?style=plastic&logo=python)
 
 - [About](#about)
 - [Usage](#usage)
