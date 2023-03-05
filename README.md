@@ -1,25 +1,24 @@
-![year](https://img.shields.io/badge/Year-2021-lightgrey?style=plastic)
-![author](https://img.shields.io/badge/Author-Johnny%20Madigan-yellow?style=plastic)
-![python version](https://img.shields.io/badge/Python-informational?style=plastic&logo=python)
+![year](https://img.shields.io/badge/2021-lightgrey?style=plastic)
+![creators](https://img.shields.io/badge/Johnny%20Madigan-yellow?style=plastic)
+![python](https://img.shields.io/badge/Python-9cf?style=plastic&logo=python)
 
-- [About](#about)
-- [Usage](#usage)
-- [How to run via the terminal](#how-to-run-via-the-terminal)
-- [How to run via *Visual Studio Code*](#how-to-run-via-visual-studio-code)
-- [Call Graph](#call-graph)
-- [Dependencies](#dependencies)
+# **CUBE SOLVER**
+A graph theory project on finding the minimum number of moves to solve a Rubik's Pocket cube (2x2x2).
 
-# **About**
-### **A GRAPH THEORY PROJECT**
-A Graph Theory project, demonstrating my skills in using math/logic to solve real-world problems. The chosen problem is that Rubik's cubes are often solved in the shortest amount of time, not the least amount of moves. This Python script first generates a Cayley Graph, then uses distance classes and a Breadth-First Search algorithm to find the shortest path between any scrambled cube and the solved state. First, the cube is encoded in **Python**, the problem is translated to mathematical language, then finally functions handle the large amount of data in a clever yet sophisticated way to solve the problem.
+It is well known that people compete to solve Rubik's cubes in the shortest amount of time, but what about the least number of moves?
+
+This Python script:
+1. Takes the state of your scrambled cube (encoded)
+2. Generates a Cayley Graph
+3. Uses distance classes and BFS to find the shortest path to the solved state
+4. Prints the minimum number of moves and the moves themselves
 
 Please see my report for more details.
 
-![project animation](/img/ezgif-demonstration.gif)
+![project animation](/img/demonstration.gif)
 
-# **Usage**
-### **GUIDE TO USING READY-MADE CUBES**
-CopyPaste one of the encoded cubes below into the *'instance'* variable in *main.py* to solve using the program.
+# **How to solve a demo cube**
+Copy one of the encoded cubes below:
 
 ```python
 "WSDAWKLDM33ML3MDSLKCMDLE"  # x  illegal cube
@@ -30,16 +29,21 @@ CopyPaste one of the encoded cubes below into the *'instance'* variable in *main
 "WYYYGGOBOORYBRRWGORWWBBG"  # 9  steps
 "WRYGGGOBOYRYRWBRGOBWWOBY"  # 10 steps - harder cube, only found after generating half a million permutations
 ```
+
+Assign to the *'instance'* variable in *main.py*
 ```python
 instance = "WWROGGOWYWRGBRYRBOBBGOYY"
 ```
+Run: `python3 main.py`
 
-### **GUIDE TO USING YOUR OWN CUBES**
-Rubik's Pocket Cube has 6 faces and 24 stickers (4 per face). When solved each face is a single colour, the colours are...
+# **How to solve your cube**
+A Rubik's Pocket cube has 6 faces and 24 stickers (4 per face).
+
+To solve, each face must be the same colour, the colours are:
 
 ![colours](/img/colours.png)
 
-Choose any face from your cube and draw a diagram out like this:
+Follow the order of the diagram and note the colour of each sticker.
 
 ```
         ┌───┬───┐
@@ -57,12 +61,18 @@ Choose any face from your cube and draw a diagram out like this:
         └───┴───┘
 ```
 
-Finally, follow the order in the diagram and note down the colour of the 24 stickers and you should end up with something like this:
+You should end up with something like this:
 
 ```python
 "WYYYGGOBOORYBRRWGORWWBBG"
 ```
-### **GUIDE TO USING DOCSTRINGS**
+Assign to the *'instance'* variable in *main.py*
+```python
+instance = "WYYYGGOBOORYBRRWGORWWBBG"
+```
+Run: `python3 main.py`
+
+# **Use docstrings**
 CopyPaste the following commands into *main.py* to get details on what each function does.
 
 ```python
@@ -71,24 +81,5 @@ print("PRINT SOLUTION:" + project.printSolution.__doc__)
 print("BREADTH-FIRST SEARCH:" + project.breadthFirst.__doc__)
 ```
 
-# **How to run via the Terminal**
-- Run with
-   ```sh
-   python3 main.py
-   ```
-
-# **How to run via *Visual Studio Code***
-- Download *VScode*: https://code.visualstudio.com
-- Follow the *Getting Started with Python* guide: https://code.visualstudio.com/docs/python/python-tutorial
-- Launch *VScode*
-- Select *Python* Interpreter version 2.7 or 3.8 or 3.9
-- Open main.py in *VScode* and click run
-
-![run button](/img/run-button.png)
-
 # **Call Graph**
-
 ![pyan3 generated call graph](/img/cube-solver-pyan3-call-graph.png)
-
-# **Dependencies**
-**Python** Interpreter versions 2.7, 3.8, and 3.9 have been proven to compile as of writing this.
