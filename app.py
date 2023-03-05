@@ -56,7 +56,7 @@ def BFS(graph, start, end):
     queue = [(start,[start])]
     visited = set()
 
-    print("Performing a Breadth-first search traversal...\n")
+    print("[INF] Performing a Breadth-first search traversal...\n")
 
     while queue:
         vertex, path = queue.pop(0)
@@ -114,7 +114,9 @@ def solution(instance):
         [1,3,0,2,16,17,18,19,4,5,6,7,8,9,10,11,12,13,14,15,22,20,23,21]]
     
     # Check early to see if the instance is encoded properly, if not, throw exception
-    if not sorted(solvedCube) == sorted(instance): raise IllegalCube(instance)
+    if not sorted(solvedCube) == sorted(instance):
+        print("\n[WARNING] Cube '{0}' not encoded properly, please try again...\n".format(instance))
+        exit()
     
     # Check early to see if the cube is already solved, if so, stop here to save memory
     if solvedCube == instance: return [solvedCube]
@@ -131,7 +133,7 @@ def solution(instance):
     toRotate = {solvedCube} # Queue of parent cubes to rotate (starts off with the solved cube)
     temporary = set()       # New neighbour cubes to be rotated next (as parent cubes)
 
-    print("\nGenerating Pocket cube group graph...\n")
+    print("\n[INF] Generating Pocket cube group graph...\n")
 
     while not instancePositions.intersection(graph):
         
@@ -150,13 +152,12 @@ def solution(instance):
             # Return the list as it provides the minimum number of steps to solve the instance.
             for instance in instancePositions:
                 if instance in graph:
-                    print("Found instance after {:,} permutations\n".format(len(graph)))
+                    print("[INF] Found instance after {:,} permutations\n".format(len(graph)))
                     shortestPath = (BFS(graph, solvedCube, instance))
                     return shortestPath
 
         toRotate = temporary # Transfer the new permutations to be rotated next
         temporary = set()    # Reset for the next set of new permutations
-
 
 #██████╗░██████╗░██╗███╗░░██╗████████╗
 #██╔══██╗██╔══██╗██║████╗░██║╚══██╔══╝
@@ -174,10 +175,13 @@ def printSolution(steps):
 
     minSteps = len(steps) - 1 # minus 1 as there are no steps to get to the solved cube
     
-    print("Steps to solve your cube:\n")
+    print("[INF] Steps to solve your cube:\n")
 
     # Reverse to show steps from instance to solved cube, rather than solved cube to instance
+    stepCount = 0
     for s in reversed(steps):
+        if (stepCount > 0):
+            print("Step #{}".format(stepCount))
         print ("        ┌───┬───┐")
         print ("        │ {} │ {} │".format(s[0], s[1]))
         print ("        ├───┼───┤")
@@ -191,12 +195,13 @@ def printSolution(steps):
         print ("        ├───┼───┤")
         print ("        │ {} │ {} │".format(s[22], s[23]))
         print ("        └───┴───┘")
+        stepCount+= 1
         time.sleep(0.25)
 
     # Check grammar and print
     grammar = "are {0} steps!\n".format(minSteps)
     if (minSteps == 1): grammar = "is 1 step!\n"
-    print("\nSOLVED!!! Minimum number of steps needed " + grammar)
+    print("\n[SOLVED] Minimum number of steps needed " + grammar)
 
 
 
@@ -214,17 +219,20 @@ def printSolution(steps):
 
 
 
-#█▀▄▀█ ▄▀█ █ █▄░█
-#█░▀░█ █▀█ █ █░▀█
 
-userInputCube = input("Press enter to use default cube...\nOr enter your encoded cube: ")
+#█▀▀ █░█ █▄▄ █▀▀   █▀ █▀█ █░░ █░█ █▀▀ █▀█
+#█▄▄ █▄█ █▄█ ██▄   ▄█ █▄█ █▄▄ ▀▄▀ ██▄ █▀▄
+
+print("\n█▀▀ █░█ █▄▄ █▀▀   █▀ █▀█ █░░ █░█ █▀▀ █▀█")
+print("█▄▄ █▄█ █▄█ ██▄   ▄█ █▄█ █▄▄ ▀▄▀ ██▄ █▀▄")
+userInputCube = input("\nPress enter to use the default cube...\nOr paste your encoded cube: ")
 defaultCube = "WYBOGWOORWGBBRYRGOGBYRYW" # min 3 steps
 
 if userInputCube:
-    print("Solving cube: {0}".format(userInputCube))
+    print("\n[SOLVING] Cube: '{0}'".format(userInputCube))
     printSolution(solution(userInputCube))
 else:
-    print("Solving default cube: {}".format(defaultCube))
+    print("\n[SOLVING] Cube: '{0}'".format(defaultCube))
     printSolution(solution(defaultCube))
 
 #                                              {{{{{{{{{{{{{{{{{GUIDE TO SCRAMBLING YOUR OWN CUBE}}}}}}}}}}}}}}}}}
